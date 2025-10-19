@@ -121,7 +121,8 @@ pub struct LedgerResponse<TransactionType> {
 #[derive(Debug, Deserialize)]
 pub struct Ledger<TransactionType> {
     /// Hash of all account state information in this ledger, as hex.
-    pub account_hash: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub account_hash: Option<String>,
     pub close_flags: u64,
     /// The time this ledger was closed, in seconds since the Ripple Epoch.
     pub close_time: LedgerTimestamp,
